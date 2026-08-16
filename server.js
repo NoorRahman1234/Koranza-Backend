@@ -144,13 +144,36 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`
+// app.listen(PORT, () => {
+//   console.log(`
+// ╔════════════════════════════════════════════════╗
+// ║           Koreanza Backend API                 ║
+// ╠════════════════════════════════════════════════╣
+// ║  Server running on: http://localhost:${PORT}      ║
+// ║  API Health:      http://localhost:${PORT}/api/health
+// ║                                                ║
+// ║  Available Endpoints:                          ║
+// ║  - GET    /api/products                        ║
+// ║  - GET    /api/products/:id                    ║
+// ║  - GET    /api/products/category/:category     ║
+// ║  - GET    /api/products/search?q=query         ║
+// ║  - POST   /api/products                        ║
+// ║  - PUT    /api/products/:id                    ║
+// ║  - DELETE /api/products/:id                    ║
+// ╚════════════════════════════════════════════════╝
+//   `);
+// });
+
+
+// Start server locally
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`
 ╔════════════════════════════════════════════════╗
 ║           Koreanza Backend API                 ║
 ╠════════════════════════════════════════════════╣
-║  Server running on: http://localhost:${PORT}      ║
-║  API Health:      http://localhost:${PORT}/api/health
+║  Server running on: http://localhost:${PORT}   ║
+║  API Health: http://localhost:${PORT}/api/health
 ║                                                ║
 ║  Available Endpoints:                          ║
 ║  - GET    /api/products                        ║
@@ -161,5 +184,9 @@ app.listen(PORT, () => {
 ║  - PUT    /api/products/:id                    ║
 ║  - DELETE /api/products/:id                    ║
 ╚════════════════════════════════════════════════╝
-  `);
-});
+    `);
+  });
+}
+
+// Export Express app for Vercel
+export default app;
